@@ -5,6 +5,9 @@
 *.so
 *.dylib
 
+# this executable
+archex5
+
 # Test binary, built with `go test -c`
 *.test
 
