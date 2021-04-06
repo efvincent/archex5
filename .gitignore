@@ -1,0 +1,32 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+vendor/
+bin/
+gen/
+
+# IDE config
+# .vscode - including vscode to get the launch.json to debug interactively
+.idea
+
+# config files
+config.yaml
+config.json
+
+# Backup files
+*~
+.DS_Store
+
+# Log files
+*.log
