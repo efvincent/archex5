@@ -29,7 +29,7 @@ $ cobra init --pkg-name github.com/[user]/[project] .
 $ cobra add hello
 ```
 
-## Branch `step-3-mux` API
+## Branch `step-3-mux` Gorilla Mux
 At Bluecore we use [Gorilla MUX](https://pkg.go.dev/github.com/gorilla/mux@v1.8.0?utm_source=gopls) for APIs in Go.
 
 1. Install in our project
@@ -67,3 +67,8 @@ func Run(host string, port string) {
 }
 ```
 That's it for now. Next step will stub out some routes for the sample application.
+
+## Branch `step-4-api` API
+In this step we implement the API routes, models, and at least stub out the handlers for the application we're building. Since one of the goals is to build and demonstrate an event sourced system, it would be good to pick something where we can demonstrate handling contention, different read models, replay, and time travel.
+
+TODO: I'm not sure what that's going to be so I'm going to go freestyle for a bit and see what happens.
