@@ -10,9 +10,9 @@ import (
 )
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	pm := models.MakeProduct()
-	w.Write([]byte(fmt.Sprintf("<h1>Product: %s</h1>", pm.SKU)))
+	w.Write([]byte(fmt.Sprintf("<h1>Product: %s</h1>", models.SampleProduct.SKU)))
 }
+
 func Run(host string, port string) {
 	router := mux.NewRouter()
 	router.HandleFunc("/", homeHandler)
