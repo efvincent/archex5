@@ -5,11 +5,13 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/efvincent/archex5/models"
 	"github.com/gorilla/mux"
 )
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1>Gorilla!</h1>"))
+	pm := models.MakeProduct()
+	w.Write([]byte(fmt.Sprintf("<h1>Product: %s</h1>", pm.SKU)))
 }
 func Run(host string, port string) {
 	router := mux.NewRouter()

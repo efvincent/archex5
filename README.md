@@ -68,7 +68,7 @@ func Run(host string, port string) {
 ```
 That's it for now. Next step will stub out some routes for the sample application.
 
-## Branch `step-4-api` API
-In this step we implement the API routes, models, and at least stub out the handlers for the application we're building. Since one of the goals is to build and demonstrate an event sourced system, it would be good to pick something where we can demonstrate handling contention, different read models, replay, and time travel.
+## Branch `step-4-models` Models, Commands, Events
+In this step we implement models, commands, events, and stub out the functions in the command processor.Since one of the goals is to build and demonstrate an event sourced system, it would be good to pick something where we can demonstrate handling contention, different read models, replay, and time travel.
 
-TODO: I'm not sure what that's going to be so I'm going to go freestyle for a bit and see what happens.
+I choose products to model, a simplified example product model, but it is interesting enough to have several commands and events to implement, and potentially we can show different reducers and projectors.
