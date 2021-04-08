@@ -25,5 +25,4 @@ func init() {
 	serverCmd.Flags().StringVar(&host, "host", "localhost", "The HTTP Host for the API.")
 	serverCmd.Flags().StringVar(&port, "port", "8080", "The HTTP Port for the API.")
 	rootCmd.AddCommand(serverCmd)
-
 }

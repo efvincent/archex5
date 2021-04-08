@@ -1,8 +1,40 @@
 package commands
 
 import (
+	"encoding/json"
+
 	models "github.com/efvincent/archex5/models"
 )
+
+func UnmarshalAsTypedCommand(cmdTypeKey string, rawJson []byte) interface{} {
+	switch cmdTypeKey {
+	case "create-product":
+		cmd := &CreateProductCmd{}
+		json.Unmarshal(rawJson, cmd)
+		return cmd
+	case "update-product-attribs":
+		cmd := &UpdateProductAttributesCmd{}
+		json.Unmarshal(rawJson, cmd)
+		return cmd
+	case "update-product-images":
+		cmd := &UpdateProductImagesCmd{}
+		json.Unmarshal(rawJson, cmd)
+		return cmd
+	case "update-product-price":
+		cmd := &UpdatePriceCmd{}
+		json.Unmarshal(rawJson, cmd)
+		return cmd
+	case "product-headcheck":
+		cmd := &HeadCheckCmd{}
+		json.Unmarshal(rawJson, cmd)
+		return cmd
+	case "product-set-active":
+		cmd := &SetActiveCmd{}
+		json.Unmarshal(rawJson, cmd)
+		return cmd
+	}
+	return nil
+}
 
 type ProductCmd struct {
 	Namespace string `json:"ns" binding:"required"`

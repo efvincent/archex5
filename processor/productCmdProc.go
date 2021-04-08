@@ -7,6 +7,7 @@ package processor
 
 import (
 	"errors"
+	"fmt"
 	"log"
 
 	"github.com/efvincent/archex5/commands"
@@ -27,8 +28,9 @@ func ProcessProductCommand(cmd interface{}) error {
 		return UpdateAttribs(c)
 	case *commands.UpdateProductImagesCmd:
 		return UpdateImages(c)
+	default:
+		return errors.New(fmt.Sprintf("Unknown command type: %v", c))
 	}
-	return errors.New("Unknown command type during ProcessProductCommand")
 }
 
 func UpdateImages(cmd *commands.UpdateProductImagesCmd) error {
@@ -42,6 +44,7 @@ func UpdateAttribs(cmd *commands.UpdateProductAttributesCmd) error {
 }
 
 func UpdatePrice(cmd *commands.UpdatePriceCmd) error {
+	log.Printf("Updating price on %s in %s", cmd.SKU, cmd.Namespace)
 	return nil
 }
 
