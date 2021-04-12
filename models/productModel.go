@@ -1,17 +1,24 @@
 package models
 
+type PriceChange struct {
+	RequestedPrice float32 `json:"requestedPrice"`
+	Timestamp      int64   `json:"ts"`
+}
 type ProductModel struct {
-	Namespace     string   `json:"ns" binding:"required"`
-	SequenceNum   int64    `json:"sequenceNum" binding:"required"`
-	SKU           string   `json:"sku" binding:"required"`
-	Title         string   `json:"title"`
-	Description   string   `json:"description"`
-	Images        []string `json:"images"`
-	PrimaryImgIdx int      `json:"primaryImgIdx"`
-	Url           string   `json:"url"`
-	IsContraband  bool     `json:"is_contraband"`
-	Price         float32  `json:"price"`
-	LastPrice     float32  `json:"lastPrice"`
+	Namespace           string        `json:"ns" binding:"required"`
+	SequenceNum         int64         `json:"sequenceNum" binding:"required"`
+	SKU                 string        `json:"sku" binding:"required"`
+	Title               string        `json:"title"`
+	Description         string        `json:"description"`
+	Images              []string      `json:"images"`
+	PrimaryImgIdx       int           `json:"primaryImgIdx"`
+	Url                 string        `json:"url"`
+	IsContraband        bool          `json:"is_contraband"`
+	IsActive            bool          `json:"is_active"`
+	HeadCheckOk         bool          `json:"headCheckOK"`
+	LastHeadCheck       int64         `json:"lastHeadCheck"`
+	Price               float32       `json:"price"`
+	PriceChangeRequests []PriceChange `json:"priceChanges"`
 }
 
 var SampleProduct = ProductModel{
@@ -26,5 +33,7 @@ the Jordan Delta Breathe combines natural and synthetic materials.`,
 	},
 	PrimaryImgIdx: 0,
 	SequenceNum:   0, // ignored when sending create command
+	IsContraband:  false,
+	IsActive:      true,
 	Url:           "https://www.nike.com/t/jordan-delta-breathe-mens-shoe-2ggX3h/CW0783-901",
 }

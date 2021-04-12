@@ -2,43 +2,58 @@ package commands
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 
 	models "github.com/efvincent/archex5/models"
 )
 
-func UnmarshalAsTypedCommand(cmdTypeKey string, rawJson []byte) interface{} {
+func UnmarshalAsTypedCommand(cmdTypeKey string, rawJson []byte) (interface{}, error) {
 	switch cmdTypeKey {
 	case "create-product":
 		cmd := &CreateProductCmd{}
-		json.Unmarshal(rawJson, cmd)
-		return cmd
+		if err := json.Unmarshal(rawJson, cmd); err != nil {
+			return nil, errors.New(fmt.Sprintf("Could not unmarshal raw json as '%s'", cmdTypeKey))
+		}
+		return cmd, nil
 	case "update-product-attribs":
 		cmd := &UpdateProductAttributesCmd{}
-		json.Unmarshal(rawJson, cmd)
-		return cmd
+		if err := json.Unmarshal(rawJson, cmd); err != nil {
+			return nil, errors.New(fmt.Sprintf("Could not unmarshal raw json as '%s'", cmdTypeKey))
+		}
+		return cmd, nil
 	case "update-product-images":
 		cmd := &UpdateProductImagesCmd{}
-		json.Unmarshal(rawJson, cmd)
-		return cmd
+		if err := json.Unmarshal(rawJson, cmd); err != nil {
+			return nil, errors.New(fmt.Sprintf("Could not unmarshal raw json as '%s'", cmdTypeKey))
+		}
+		return cmd, nil
 	case "update-product-price":
 		cmd := &UpdatePriceCmd{}
-		json.Unmarshal(rawJson, cmd)
-		return cmd
+		if err := json.Unmarshal(rawJson, cmd); err != nil {
+			return nil, errors.New(fmt.Sprintf("Could not unmarshal raw json as '%s'", cmdTypeKey))
+		}
+		return cmd, nil
 	case "product-headcheck":
 		cmd := &HeadCheckCmd{}
-		json.Unmarshal(rawJson, cmd)
-		return cmd
+		if err := json.Unmarshal(rawJson, cmd); err != nil {
+			return nil, errors.New(fmt.Sprintf("Could not unmarshal raw json as '%s'", cmdTypeKey))
+		}
+		return cmd, nil
 	case "product-set-active":
 		cmd := &SetActiveCmd{}
-		json.Unmarshal(rawJson, cmd)
-		return cmd
+		if err := json.Unmarshal(rawJson, cmd); err != nil {
+			return nil, errors.New(fmt.Sprintf("Could not unmarshal raw json as '%s'", cmdTypeKey))
+		}
+		return cmd, nil
 	}
-	return nil
+	return nil, errors.New(fmt.Sprintf("Unknown event type '%s'", cmdTypeKey))
 }
 
 type ProductCmd struct {
 	Namespace string `json:"ns" binding:"required"`
 	Timestamp int    `json:"ts" binding:"required"`
+	UID       string `json:"uid" binding:"required"`
 	SKU       string `json:"sku" binding:"required"`
 }
 
@@ -46,9 +61,10 @@ type ProductCmd struct {
 // ie if the product exist this command fails. For product updates there are specific
 // commands for the types of updates, see below
 type CreateProductCmd struct {
-	ProductCmd
-	Source  string              `json:"source"`
-	Product models.ProductModel `json:"product"`
+	Timestamp int                 `json:"ts" binding:"required"`
+	UID       string              `json:"uid" binding:"required"`
+	Source    string              `json:"source"`
+	Product   models.ProductModel `json:"product"`
 }
 
 // Used to update attributes on the product that do not require special

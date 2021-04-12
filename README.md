@@ -113,3 +113,8 @@ type ProductCreated struct {
 the `ProductCreated` event records the fact that the product was created. The command processor has the logic and opportunity to access resources such as databases or other APIs to determine if a command is valid when it is received, and what event or events should occur as a result of processing the command. Once the events are created and recorded, it is a permanent part of the history of the system. Events are **immutable**, once they are created and successfully written to the event store, they cannot be deleted during the normal course of events.
 
 As a practical matter most event sourced systems allow for compaction and/or removal of events as part of a retention scheme, but that's out of scope of this exercise.
+
+## Branch `step-6-cmdprocs` Command Processors & Memory Event Store
+Next we'll build the command processors. When a command hits a command processor, the job is to pull in whatever information is needed from the world to validate the command. Is it valid? If the command is valid and can be executed, the command processor **performs whatever action is dictated by the command**. In the most common case, the action to be executed is to mutate the durable state of the system (ie, to apply some CRUD operation). But that's definitely not the only possibility. Commands can trigger a credit card to be debited, an API call to be made to some external system, a stepper motor to articulate, a deploy to be started, etc.
+
+In our case, commands are performing CRUD operations on the entities in our domain - products.

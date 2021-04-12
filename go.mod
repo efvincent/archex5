@@ -3,6 +3,8 @@ go 1.15
 module github.com/efvincent/archex5
 
 require (
+	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
+	github.com/google/uuid v1.2.0
 	github.com/gorilla/mux v1.8.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/spf13/cobra v1.1.3
