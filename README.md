@@ -1,7 +1,67 @@
 # Arch Example
 
-## Branch `step-1-scaffold`
-This **ArchEX5** project has branches that show the result of doing blocks of steps. Branch `step-1-scaffold` is the result of minimally scaffolding out the project
+### Running the example
+At the current time (step 6 complete), you can start the API server which will use a memory based event store with
+```bash
+$ go run main.go server
+```
+Help is available with
+```bash
+$ go run main.go --help
+```
+
+### Samples for the API
+At the current time (step 6 complete), the API consists of:
+
+#### Create a product
+`POST localhost:8080/api/command`
+```json
+{
+    "commandType": "create-product",
+    "source": "test",
+    "product": {
+        "ns": "nike",
+        "sequeceNum": 0,
+        "SKU": "102",
+        "title": "Jordan Delta Breathe",
+        "description": "Inspired by high-tech etc",
+        "images": ["https://via.placeholder.com/600/c984bf",
+		"https://via.placeholder.com/400/abcdef"],
+        "primaryImgIdx": 0,
+        "is_active": true,
+        "url": "",
+        "price": 129.99
+    }
+}
+```
+
+#### Headcheck
+`POST localhost:8080/api/command`
+```json
+{
+    "commandType": "product-headcheck",
+    "ns": "nike",
+    "sku": "103",
+    "reason": "oh, no reason."
+}
+```
+#### Update Price
+`POST localhost:8080/api/command`
+```json
+{
+    "commandType": "update-product-price",
+    "ns": "nike",
+    "sku": "102",
+    "price": 129.99
+}
+```
+#### Get Stream IDs within Namespace
+`GET localhost:8080/api/{namespace}/products`
+
+#### Get Product Aggregate
+`GET localhost:8080/api/{namespace}/products/{sku}`
+## Step 1 - Scaffold
+This **ArchEX5** project has branches that show the result of doing blocks of steps. Except for the first step b/c I blew away the branch... but it's simple enough, the result of minimally scaffolding out the project
 1. From `GOROOT` which for me is `~/go`, create a folder under `github.com/[user]/[project]`. This is the project root folder
 2. Initialize a git repo here
 2. Touch `go.mod`, add one line `go 1.15`
